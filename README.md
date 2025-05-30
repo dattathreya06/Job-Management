@@ -102,45 +102,7 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-## 📁 Project Structure
 
-\`\`\`
-job-management-system/
-├── app/                          # Next.js App Router
-│   ├── api/                      # API routes
-│   │   ├── jobs/                 # Job-related endpoints
-│   │   │   ├── route.ts          # GET, POST /api/jobs
-│   │   │   └── [id]/route.ts     # GET, PUT, DELETE /api/jobs/[id]
-│   │   └── test-db/route.ts      # Database connection test
-│   ├── globals.css               # Global styles
-│   ├── layout.tsx                # Root layout component
-│   ├── loading.tsx               # Loading component
-│   └── page.tsx                  # Main page component
-├── components/                   # Reusable components
-│   ├── ui/                       # UI components (shadcn/ui)
-│   │   ├── button.tsx
-│   │   ├── card.tsx
-│   │   ├── dialog.tsx
-│   │   ├── form.tsx
-│   │   ├── input.tsx
-│   │   ├── select.tsx
-│   │   ├── sheet.tsx
-│   │   ├── slider.tsx
-│   │   └── toast.tsx
-│   ├── enhanced-range-slider.tsx # Custom salary range slider
-│   └── job-creation-form.tsx     # Job creation form
-├── hooks/                        # Custom React hooks
-│   └── use-toast.ts              # Toast notification hook
-├── lib/                          # Utility libraries
-│   ├── mongodb.ts                # MongoDB connection
-│   └── utils.ts                  # Utility functions
-├── public/                       # Static assets
-├── .env.local                    # Environment variables (create this)
-├── package.json                  # Dependencies and scripts
-├── tailwind.config.ts            # Tailwind CSS configuration
-├── tsconfig.json                 # TypeScript configuration
-└── README.md                     # Project documentation
-\`\`\`
 
 ## 🔧 Configuration
 
