@@ -54,7 +54,6 @@ interface Job {
 export default function JobManagementInterface() {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
-  // Changed to k format: 50k-150k range
   const [salaryRange, setSalaryRange] = useState([50, 150]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("");
@@ -115,7 +114,6 @@ export default function JobManagementInterface() {
     }
 
     // Filter by salary range - convert k to L format for comparison
-    // salaryRange is in k (50k-150k), job salaryRange is in L (5L-15L)
     filtered = filtered.filter((job) => {
       const salaryMatch = job.salaryRange.match(/₹(\d+)L/);
       if (salaryMatch) {
@@ -246,27 +244,57 @@ export default function JobManagementInterface() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+      {/* Header with 60% width navbar and 20% spacing on each side */}
+      <header className="py-6 px-6 bg-gray-50">
+        <div className="w-full flex justify-center">
+          {/* Navbar with 60% width */}
+          <div className="w-[65%] bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between px-8 py-4">
             {/* Logo */}
             <div className="flex items-center">
-              <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">CM</span>
+              <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl flex items-center justify-center">
+                <span className="text-white font-bold text-lg">CM</span>
               </div>
             </div>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex space-x-8">
-              <NavItems />
+            {/* Desktop Navigation - Centered with proper spacing */}
+            <nav className="hidden md:flex items-center space-x-8 flex-1 justify-center mx-12">
+              <a
+                href="#"
+                className="text-gray-700 hover:text-gray-900 font-medium text-sm"
+              >
+                Home
+              </a>
+              <a
+                href="#"
+                className="text-gray-700 hover:text-gray-900 font-medium text-sm"
+              >
+                Find Jobs
+              </a>
+              <a
+                href="#"
+                className="text-gray-700 hover:text-gray-900 font-medium text-sm"
+              >
+                Find Talents
+              </a>
+              <a
+                href="#"
+                className="text-gray-700 hover:text-gray-900 font-medium text-sm"
+              >
+                About us
+              </a>
+              <a
+                href="#"
+                className="text-gray-700 hover:text-gray-900 font-medium text-sm"
+              >
+                Testimonials
+              </a>
             </nav>
 
             {/* Desktop Create Jobs Button */}
             <div className="hidden md:block">
               <Button
                 onClick={openCreateModal}
-                className="bg-gradient-to-r from-[#A128FF] to-[#6100AD] hover:from-[#9020EE] hover:to-[#5000A0] text-white px-6"
+                className="bg-gradient-to-r from-[#A128FF] to-[#6100AD] hover:from-[#9020EE] hover:to-[#5000A0] text-white px-6 py-2.5 rounded-xl font-medium text-sm shadow-lg"
               >
                 <Plus className="h-4 w-4 mr-2" />
                 Create Jobs
@@ -277,17 +305,46 @@ export default function JobManagementInterface() {
             <div className="md:hidden">
               <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
                 <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon">
+                  <Button variant="ghost" size="icon" className="rounded-xl">
                     <Menu className="h-6 w-6" />
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="right" className="w-[300px] sm:w-[400px]">
                   <div className="flex flex-col space-y-4 mt-6">
-                    <NavItems />
+                    <a
+                      href="#"
+                      className="text-gray-700 hover:text-gray-900 font-medium block py-2"
+                    >
+                      Home
+                    </a>
+                    <a
+                      href="#"
+                      className="text-gray-700 hover:text-gray-900 font-medium block py-2"
+                    >
+                      Find Jobs
+                    </a>
+                    <a
+                      href="#"
+                      className="text-gray-700 hover:text-gray-900 font-medium block py-2"
+                    >
+                      Find Talents
+                    </a>
+                    <a
+                      href="#"
+                      className="text-gray-700 hover:text-gray-900 font-medium block py-2"
+                    >
+                      About us
+                    </a>
+                    <a
+                      href="#"
+                      className="text-gray-700 hover:text-gray-900 font-medium block py-2"
+                    >
+                      Testimonials
+                    </a>
                     <div className="pt-4 border-t">
                       <Button
                         onClick={openCreateModal}
-                        className="w-full bg-gradient-to-r from-[#A128FF] to-[#6100AD] hover:from-[#9020EE] hover:to-[#5000A0] text-white"
+                        className="w-full bg-gradient-to-r from-[#A128FF] to-[#6100AD] hover:from-[#9020EE] hover:to-[#5000A0] text-white rounded-xl"
                       >
                         <Plus className="h-4 w-4 mr-2" />
                         Create Jobs
@@ -469,7 +526,7 @@ export default function JobManagementInterface() {
                   </div>
                 </CardContent>
                 <CardFooter className="pt-4">
-                  <Button className="w-full bg-[#00AAFF] hover:bg-[#0099EE] text-white">
+                  <Button className="w-full bg-[#00AAFF] hover:bg-[#0099EE] text-white rounded-full">
                     Apply Now
                   </Button>
                 </CardFooter>
