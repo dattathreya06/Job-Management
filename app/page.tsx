@@ -171,24 +171,22 @@ export default function JobManagementInterface() {
 
     if (diffInHours < 1) {
       return "Just now";
-    } else if (diffInHours < 24) {
-      return `${diffInHours}h ago`;
     } else {
-      const diffInDays = Math.floor(diffInHours / 24);
-      return `${diffInDays}d ago`;
+      return `${diffInHours}h Ago`; // Capital "A"
     }
   };
 
   const formatJobDescription = (description: string) => {
-    // Split description into sentences and create bullet points
-    const sentences = description
-      .split(/[.!?]+/)
-      .filter((sentence) => sentence.trim().length > 0);
-    return sentences.slice(0, 3).map((sentence, index) => (
-      <li key={index} className="text-xs text-gray-600 mb-1">
-        {sentence.trim()}
-      </li>
-    ));
+    return description
+      .split(".") // split only by full stops
+      .map((sentence) => sentence.trim())
+      .filter((sentence) => sentence.length > 0)
+      .slice(0, 3) // limit to first 3 items
+      .map((sentence, index) => (
+        <li key={index} className="text-xs text-gray-600 mb-1">
+          {sentence}.
+        </li>
+      ));
   };
 
   const openCreateModal = () => {
@@ -248,11 +246,16 @@ export default function JobManagementInterface() {
       <header className="py-6 px-6 bg-gray-50">
         <div className="w-full flex justify-center">
           {/* Navbar with 60% width */}
-          <div className="w-[65%] bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between px-8 py-4">
+          <div className="w-[65%] bg-white rounded-[4rem] shadow-sm border border-gray-100 flex items-center justify-between px-8 py-4">
             {/* Logo */}
             <div className="flex items-center">
-              <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-lg">CM</span>
+              <div className="w-10 h-10  rounded-xl flex items-center justify-center">
+                {/* <span className="text-white font-bold text-lg">CM</span> */}
+                <img
+                  src="/cyberminds_logo.png" // ✅ Update this path to your actual logo
+                  alt="Logo"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
 
@@ -260,31 +263,31 @@ export default function JobManagementInterface() {
             <nav className="hidden md:flex items-center space-x-8 flex-1 justify-center mx-12">
               <a
                 href="#"
-                className="text-gray-700 hover:text-gray-900 font-medium text-sm"
+                className="text-[#303030] hover:text-black font-medium text-sm"
               >
                 Home
               </a>
               <a
                 href="#"
-                className="text-gray-700 hover:text-gray-900 font-medium text-sm"
+                className="text-[#303030] hover:text-black font-medium text-sm"
               >
                 Find Jobs
               </a>
               <a
                 href="#"
-                className="text-gray-700 hover:text-gray-900 font-medium text-sm"
+                className="text-[#303030] hover:text-black font-medium text-sm"
               >
                 Find Talents
               </a>
               <a
                 href="#"
-                className="text-gray-700 hover:text-gray-900 font-medium text-sm"
+                className="text-[#303030] hover:text-black font-medium text-sm"
               >
                 About us
               </a>
               <a
                 href="#"
-                className="text-gray-700 hover:text-gray-900 font-medium text-sm"
+                className="text-[#303030] hover:text-black font-medium text-sm"
               >
                 Testimonials
               </a>
@@ -294,9 +297,9 @@ export default function JobManagementInterface() {
             <div className="hidden md:block">
               <Button
                 onClick={openCreateModal}
-                className="bg-gradient-to-r from-[#A128FF] to-[#6100AD] hover:from-[#9020EE] hover:to-[#5000A0] text-white px-6 py-2.5 rounded-xl font-medium text-sm shadow-lg"
+                className="bg-gradient-to-r from-[#A128FF] to-[#6100AD] hover:from-[#9020EE] hover:to-[#5000A0] text-white px-6 py-2.5 rounded-[4rem] font-medium text-sm shadow-lg"
               >
-                <Plus className="h-4 w-4 mr-2" />
+                {/* <Plus className="h-4 w-4 mr-2" /> */}
                 Create Jobs
               </Button>
             </div>
@@ -360,9 +363,11 @@ export default function JobManagementInterface() {
               open={isCreateModalOpen}
               onOpenChange={setIsCreateModalOpen}
             >
-              <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+              <DialogContent className="max-w-[848px] max-h-[779px] overflow-y-auto rounded-[16px]">
                 <DialogHeader>
-                  <DialogTitle>Create Job Opening</DialogTitle>
+                  <DialogTitle className="text-center">
+                    Create Job Opening
+                  </DialogTitle>
                 </DialogHeader>
                 <JobCreationForm onJobCreated={handleJobCreated} />
               </DialogContent>
@@ -371,36 +376,33 @@ export default function JobManagementInterface() {
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8">
-        {/* Search and Filters */}
-        <div className="bg-white rounded-lg shadow-sm p-4 md:p-6 mb-6 md:mb-8">
-          <div className="flex flex-col lg:flex-row gap-4 items-stretch lg:items-end">
-            {/* Search Input */}
-            <div className="flex-1 min-w-[250px]">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full px-4 sm:px-6 py-4 mb-6">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6 w-full">
+            <div className="flex flex-col lg:flex-row items-stretch justify-between w-full gap-4">
+              {/* Search Input */}
+              <div className="flex items-center gap-2 flex-1">
+                <Search className="h-4 w-4 text-gray-400" />
                 <Input
                   placeholder="Search By Job Title, Role"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10"
+                  className="border-none shadow-none px-2 focus-visible:ring-0 focus-visible:ring-offset-0 text-sm w-full"
                 />
               </div>
-            </div>
 
-            {/* Filters Row */}
-            <div className="flex flex-col sm:flex-row gap-4 lg:gap-4">
+              {/* Divider */}
+              <div className="hidden lg:block h-6 border-l border-gray-200"></div>
+
               {/* Location Filter */}
-              <div className="min-w-[180px]">
+              <div className="flex items-center gap-2 flex-1">
+                <MapPin className="h-4 w-4 text-gray-400" />
                 <Select
                   value={selectedLocation}
                   onValueChange={setSelectedLocation}
                 >
-                  <SelectTrigger>
-                    <div className="flex items-center gap-2">
-                      <MapPin className="h-4 w-4 text-gray-400" />
-                      <SelectValue placeholder="Location" />
-                    </div>
+                  <SelectTrigger className="border-none shadow-none focus:ring-0 focus:ring-offset-0 p-0 text-sm w-full">
+                    <SelectValue placeholder="Preferred Location" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">All Locations</SelectItem>
@@ -414,17 +416,18 @@ export default function JobManagementInterface() {
                 </Select>
               </div>
 
+              {/* Divider */}
+              <div className="hidden lg:block h-6 border-l border-gray-200"></div>
+
               {/* Job Type Filter */}
-              <div className="min-w-[140px]">
+              <div className="flex items-center gap-2 flex-1">
+                <Briefcase className="h-4 w-4 text-gray-400" />
                 <Select
                   value={selectedJobType}
                   onValueChange={setSelectedJobType}
                 >
-                  <SelectTrigger>
-                    <div className="flex items-center gap-2">
-                      <Briefcase className="h-4 w-4 text-gray-400" />
-                      <SelectValue placeholder="Job type" />
-                    </div>
+                  <SelectTrigger className="border-none shadow-none focus:ring-0 focus:ring-offset-0 p-0 text-sm w-full">
+                    <SelectValue placeholder="Job type" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">All Types</SelectItem>
@@ -436,8 +439,14 @@ export default function JobManagementInterface() {
                 </Select>
               </div>
 
-              {/* Salary Range Filter - Now in k format */}
-              <div className="min-w-[220px]">
+              {/* Divider */}
+              <div className="hidden lg:block h-6 border-l border-gray-200"></div>
+
+              {/* Salary Range */}
+              <div className="flex flex-col flex-1">
+                {/* <span className="text-xs font-medium text-gray-500 mb-1 hidden sm:block">
+                  Salary Per Month
+                </span> */}
                 <EnhancedRangeSlider
                   value={salaryRange}
                   onValueChange={setSalaryRange}
@@ -446,6 +455,9 @@ export default function JobManagementInterface() {
                   step={10}
                   formatLabel={(val) => `₹${val}k`}
                 />
+                {/* <div className="text-sm text-gray-700 mt-1 hidden sm:block">
+                  ₹{salaryRange[0]}k - ₹{salaryRange[1]}k
+                </div> */}
               </div>
             </div>
           </div>
@@ -467,17 +479,17 @@ export default function JobManagementInterface() {
             filteredJobs.map((job) => (
               <Card
                 key={job.id}
-                className="hover:shadow-lg transition-shadow duration-200 flex flex-col"
+                className="w-full sm:w-[300px] h-auto rounded-[12px] hover:shadow-lg transition-shadow duration-200 flex flex-col"
               >
                 <CardHeader className="pb-3">
                   <div className="flex items-start justify-between mb-3">
-                    <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
+                    <div className="w-14 h-14 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
                       <img
                         src={
                           getCompanyLogo(job.companyName) || "/placeholder.svg"
                         }
                         alt={`${job.companyName} logo`}
-                        className="w-8 h-8 object-contain"
+                        className="w-14 h-14 object-contain"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
                           target.src = `https://via.placeholder.com/32x32/6366f1/ffffff?text=${job.companyName.charAt(
@@ -488,7 +500,7 @@ export default function JobManagementInterface() {
                     </div>
                     <Badge
                       variant="secondary"
-                      className="bg-blue-100 text-blue-700 text-xs whitespace-nowrap ml-2"
+                      className="bg-[#B0D9FF] text-[#000000] text-xs whitespace-nowrap ml-2 rounded-[10px] h-[33px] w-[75px]"
                     >
                       {getTimeAgo(job.createdAt)}
                     </Badge>
@@ -497,15 +509,11 @@ export default function JobManagementInterface() {
                     <h3 className="font-semibold text-lg text-gray-900 line-clamp-2 mb-1">
                       {job.title}
                     </h3>
-                    <p className="text-sm text-gray-600 mb-3">
-                      {job.companyName}
-                    </p>
-
                     {/* Horizontal Job Details */}
-                    <div className="flex flex-wrap items-center gap-3 text-xs text-gray-600">
+                    <div className="flex flex-wrap items-center gap-3 text-xs text-gray-600 py-2">
                       <div className="flex items-center gap-1">
                         <Users className="h-3 w-3 flex-shrink-0" />
-                        <span>2+ yr Exp</span>
+                        <span>1-3 yr Exp</span>
                       </div>
                       <div className="flex items-center gap-1">
                         <Building className="h-3 w-3 flex-shrink-0" />
@@ -525,8 +533,8 @@ export default function JobManagementInterface() {
                     </ul>
                   </div>
                 </CardContent>
-                <CardFooter className="pt-4">
-                  <Button className="w-full bg-[#00AAFF] hover:bg-[#0099EE] text-white rounded-full">
+                <CardFooter className="">
+                  <Button className="w-full h-[46px] rounded-[10px] border border-solid border-gray-300 px-[10px] py-[12px] gap-[10px] bg-[#00AAFF] hover:bg-[#0099EE] text-white">
                     Apply Now
                   </Button>
                 </CardFooter>
