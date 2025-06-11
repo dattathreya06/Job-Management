@@ -518,7 +518,7 @@ export default function JobManagementInterface() {
                       <div className="flex items-center gap-1">
                         <Building className="h-3 w-3 flex-shrink-0" />
                         {/* <span className="truncate">{job.location}</span> */}
-                        <span className="truncate">On-site</span>
+                        <span className="truncate">Onsite</span>
                       </div>
                       <div className="flex items-center gap-1">
                         <DollarSign className="h-3 w-3 flex-shrink-0" />
