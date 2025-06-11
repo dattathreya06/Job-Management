@@ -510,18 +510,22 @@ export default function JobManagementInterface() {
                       {job.title}
                     </h3>
                     {/* Horizontal Job Details */}
-                    <div className="flex flex-wrap items-center gap-3 text-xs text-gray-600 py-2">
+                    <div className="flex items-center gap-1 text-base text-gray-600 py-2">
                       <div className="flex items-center gap-1">
-                        <Users className="h-3 w-3 flex-shrink-0" />
+                        <Users className="h-4 w-4 flex-shrink-0" />
                         <span>1-3 yr Exp</span>
                       </div>
                       <div className="flex items-center gap-1">
                         <Building className="h-3 w-3 flex-shrink-0" />
-                        <span className="truncate">{job.location}</span>
+                        {/* <span className="truncate">{job.location}</span> */}
+                        <span className="truncate">On-site</span>
                       </div>
                       <div className="flex items-center gap-1">
                         <DollarSign className="h-3 w-3 flex-shrink-0" />
-                        <span className="truncate">{job.salaryRange}</span>
+                        {/* <span className="truncate">{job.salaryRange}</span> */}
+                        <span className="truncate">
+                          {job.salaryRange.split("-")[0].trim()}PA
+                        </span>
                       </div>
                     </div>
                   </div>
